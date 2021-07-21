@@ -3,6 +3,7 @@ package com.bank.beans;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable{
 	private static final long serialVersionUID = -6426075925303078798L;
@@ -16,8 +17,12 @@ public class User implements Serializable{
 	private UserType type;
 
 	//Array containing a List of checking accounts and/or saving accounts
-	private ArrayList<CheckingAccount> checkingAccounts;
-	private ArrayList <SavingsAccount> savingsAccounts; 
+	private List<CheckingAccount> checkingAccounts;
+	private List <SavingsAccount> savingsAccounts;
+	
+	public long loanAmount;
+	public boolean loanSent = false;
+	public boolean loanApproved = false;
 	
 	public User() {
 		super();
@@ -33,6 +38,8 @@ public class User implements Serializable{
 		this.lname = lname;
 		this.email = email;
 		this.birthday = birthday;
+		checkingAccounts = new ArrayList<CheckingAccount>();
+		savingsAccounts = new ArrayList<SavingsAccount>();
 	}
 	
 	public Integer getId() {
@@ -65,13 +72,13 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public ArrayList<CheckingAccount> getCheckingAccounts() {
+	public List<CheckingAccount> getCheckingAccounts() {
 		return checkingAccounts;
 	}
-	public void setCheckingAccounts(ArrayList<CheckingAccount> checkingAccounts) {
-		this.checkingAccounts = checkingAccounts;
+	public void setCheckingAccounts(List l) {
+		this.checkingAccounts = l;
 	}
-	public ArrayList<SavingsAccount> getSavingsAccounts() {
+	public List<SavingsAccount> getSavingsAccounts() {
 		return savingsAccounts;
 	}
 	public void setSavingsAccounts(ArrayList<SavingsAccount> savingsAccounts) {
