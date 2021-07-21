@@ -30,16 +30,29 @@ public class userDAO {
 		}
 	}
 	
-	public User getUser(String name) {
+	public User getUser(String name, String password) {
 		for(User user: users) {
-			if(user.getUsername().equals(name)) {
+			if(user.getUsername().equals(name) && user.getPassword().equals(password)) {
 				return user;
 			}
 		}
 		return null;
 	}
 	
+	public boolean checkUser(String name) {
+		for(User user: users) {
+			if(user.getUsername().equals(name))
+				return true;
+		}
+		return false;
+	}
+	
 	public void writeToFile() {
 		new DataSerializer<User>().writeObjectsToFile(users, filename);
+	}
+	
+	public void addUser(String username, String password, String fname, String lname, String email, LocalDate birthday) {
+		users.add(new User(users.size(), username, password, fname, lname, email, LocalDate.of(1999, 3, 10)));
+		writeToFile();
 	}
 }
