@@ -28,10 +28,6 @@ public class UserService {
 		ud.addUser(username, password, fname, lname, email, birthday);
 	}
 	
-	public void updateData(User user, List<CheckingAccount> L) {
-		user.setCheckingAccounts(L);
-		ud.writeToFile();
-	}
 	
 	public void addLoanApplication(User u, long amount) {
 		loans.add(new LoanApplication(loans.size(), amount,u));
@@ -59,5 +55,12 @@ public class UserService {
 	
 	public LoanApplication getLoanById(int id) {
 		return loans.get(id);
+	}
+	
+	//Set new accounts into the DAO
+	public void updateAccounts(User u) {
+		u.setCheckingAccounts(u.getCheckingAccounts());
+		u.setSavingsAccounts(u.getSavingsAccounts());
+		ud.writeToFile();
 	}
 }

@@ -1,6 +1,11 @@
 package com.bank.beans;
 
-public class SavingsAccount {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class SavingsAccount implements Serializable {
+	
+	private static final long serialVersionUID = 65487931l;
 	private Long balance = 0l;
 	private int id;
 	
@@ -19,5 +24,27 @@ public class SavingsAccount {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(balance, id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SavingsAccount other = (SavingsAccount) obj;
+		return Objects.equals(balance, other.balance) && id == other.id;
+	}
+
+	@Override
+	public String toString() {
+		return "SavingsAccount [balance=" + balance + ", id=" + id + "]";
 	}
 }

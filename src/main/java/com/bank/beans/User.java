@@ -81,8 +81,8 @@ public class User implements Serializable{
 	public List<SavingsAccount> getSavingsAccounts() {
 		return savingsAccounts;
 	}
-	public void setSavingsAccounts(ArrayList<SavingsAccount> savingsAccounts) {
-		this.savingsAccounts = savingsAccounts;
+	public void setSavingsAccounts(List<SavingsAccount> list) {
+		this.savingsAccounts = list;
 	}
 	public LocalDate getBirthday() {
 		return birthday;
@@ -172,6 +172,11 @@ public class User implements Serializable{
 			return false;
 		return true;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", fname=" + fname + ", lname=" + lname + ", checkingAccounts="
+				+ checkingAccounts + ", savingsAccounts=" + savingsAccounts + "]";
+	}
+	
 }

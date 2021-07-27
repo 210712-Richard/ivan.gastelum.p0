@@ -269,6 +269,7 @@ public class Menu {
 					} break;
 				}
 			}
+			us.updateAccounts(loggedUser); 		//Added new account into User DAO
 		}
 	}
 
@@ -278,8 +279,8 @@ public class Menu {
 			//List<CheckingAccount> a = loggedUser.getCheckingAccounts();
 			//us.updateData(loggedUser,a);
 			loggedUser.getSavingsAccounts().add(new SavingsAccount(1));
+			//
 			System.out.println("Great! we have created both a checking and savings accounts for you!");
-			
 		}else {
 			createLoop: while(true) {
 				System.out.println("Select an option: ");
@@ -305,6 +306,7 @@ public class Menu {
 				}
 			}
 		}
+		us.updateAccounts(loggedUser); 		//Added new account into User DAO
 	}
 
 	private void adminMenu() {
