@@ -1,6 +1,8 @@
 package com.bank.beans;
 
-public class LoanApplication {
+import java.io.Serializable;
+
+public class LoanApplication implements Serializable {
 	private int id;
 	private long amountRequested;
 	private boolean loanApproved = false;

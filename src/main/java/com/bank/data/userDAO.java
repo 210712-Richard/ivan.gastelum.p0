@@ -61,9 +61,11 @@ public class userDAO {
 		new DataSerializer<User>().writeObjectsToFile(users, filename);
 	}
 	
-	public void addUser(String username, String password, String fname, String lname, String email, LocalDate birthday) {
-		users.add(new User(users.size(), username, password, fname, lname, email, birthday));
+	public User addUser(String username, String password, String fname, String lname, String email, LocalDate birthday) {
+		User u = new User(users.size(), username, password, fname, lname, email, birthday);
+		users.add(u);
 		writeToFile();
+		return u;
 	}
 
 	//Added new

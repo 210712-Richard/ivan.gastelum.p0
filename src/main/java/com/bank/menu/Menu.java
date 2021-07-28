@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.bank.beans.CheckingAccount;
 import com.bank.beans.SavingsAccount;
 import com.bank.beans.User;
+import com.bank.services.LoanService;
 import com.bank.services.UserService;
 import com.bank.util.SingletonScanner;
 
@@ -15,6 +16,7 @@ public class Menu {
 	//private static final Logger log = LogManager.getLogger(Menu.class);
 	
 	private UserService us = new UserService();
+	private LoanService ls = new LoanService();
 	private User loggedUser = null;
 	private Scanner scan = SingletonScanner.getScanner().getScan();
 	
@@ -217,7 +219,7 @@ public class Menu {
 		System.out.println("Enter the amount you want to request in your loan:");
 		long amount = (long)select();
 		loggedUser.loanAmount = amount;
-		us.addLoanApplication(loggedUser, amount);
+		ls.registerLoan(loggedUser, amount);
 		loggedUser.loanSent = true;
 		System.out.println("Great! we will notify you when your loan was approved.");
 	}
@@ -331,21 +333,21 @@ public class Menu {
 	}
 	
 	private void approveForLoan() {
-		if(us.loans.size()==0) {
+		if(ls.getSize()==0) {
 			System.out.println("There are no loan applications to approve.");
 		}else {
 			loanloop: while(true) {
-				us.printLoanList();
+				ls.viewLoans();
 				System.out.println("To approve a loan, enter the loan ID#");
 				System.out.println("Enter -1 to Return <-");
 				int selection = select();
 				if(selection==-1)
 					break loanloop;
 				else {
-					if(us.checkAlreadyApproved(us.getLoanById(selection)))
+					if(ls.checkAlreadyApproved(ls.getLoanById(selection)))
 						continue;
 					else {
-						us.acceptLoan(us.getLoanById(selection));
+						ls.acceptLoan(ls.getLoanById(selection));
 					}
 				}
 			}
