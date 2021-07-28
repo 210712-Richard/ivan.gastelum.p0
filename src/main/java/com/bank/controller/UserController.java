@@ -152,6 +152,7 @@ public class UserController {
 		}
 		
 		LoanApplication la = ls.registerLoan(loggedUser, moneyRequested);
+		us.updateInfo(loggedUser);
 		log.trace("Loan application has been sent.");
 		ctx.status(201);
 		ctx.json(la);
@@ -168,7 +169,39 @@ public class UserController {
 		}
 		if(loggedUser.loanApproved) {
 			loggedUser.getCheckingAccounts().get(0).setBalance(loggedUser.getCheckingAccounts().get(0).getBalance()+loggedUser.loanAmount);
+			loggedUser.loanAmount = 0;
+			loggedUser.loanApproved = false;
+			loggedUser.loanSent = false;
 			us.updateAccounts(loggedUser);
+			log.trace("Loan approved has been deposited.");
+		}else {
+			ctx.html("Loan has not been approved yet.");
 		}
+	}
+	
+	public void viewCheckingAccounts(Context ctx) {
+		User loggedUser = ctx.sessionAttribute("loggedUser");
+		String username = ctx.pathParam("username");
+		
+		//Checking if logged in
+		if(loggedUser == null || !loggedUser.getUsername().equals(username)) {
+			ctx.status(401);
+			return;
+		}
+		
+		ctx.json(loggedUser.getCheckingAccounts());
+	}
+	
+	public void viewSavingsAccounts(Context ctx) {
+		User loggedUser = ctx.sessionAttribute("loggedUser");
+		String username = ctx.pathParam("username");
+		
+		//Checking if logged in
+		if(loggedUser == null || !loggedUser.getUsername().equals(username)) {
+			ctx.status(401);
+			return;
+		}
+		
+		ctx.json(loggedUser.getSavingsAccounts());
 	}
 }

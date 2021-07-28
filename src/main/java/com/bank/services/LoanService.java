@@ -24,6 +24,7 @@ public class LoanService {
 	public void acceptLoan(LoanApplication la) {
 		la.setLoanApproved(true);
 		la.getU().loanApproved = true;
+		//la.getU().loanAmount = la.getAmountRequested();
 		ld.writeToFile();
 	}
 	

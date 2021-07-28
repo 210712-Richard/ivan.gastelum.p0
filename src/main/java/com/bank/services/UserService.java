@@ -57,4 +57,8 @@ public class UserService {
 		updateAccounts(u);
 		return u;
 	}
+
+	public void updateInfo(User u) {
+		ud.writeToFile();
+	}
 }

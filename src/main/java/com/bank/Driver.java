@@ -68,6 +68,12 @@ public class Driver {
 		
 		//As a user, I can get deposit my approved loan
 		app.put("users/:username/depositLoan", uc::depositLoan);
+		
+		//As a user, I can view my Checking accounts
+		app.get("users/:username/viewCheckingAccounts", uc::viewCheckingAccounts);
+		
+		//As a user, I can view my Savings accounts
+		app.get("users/:username/viewSavingsAccounts", uc::viewSavingsAccounts);
 	}
 
 }

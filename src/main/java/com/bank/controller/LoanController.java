@@ -39,8 +39,6 @@ public class LoanController {
 	public void viewLoanApplications(Context ctx) {
 		User loggedUser = ctx.sessionAttribute("loggedUser");
 		String username = ctx.pathParam("username");
-		String id = ctx.pathParam("id");
-		int loan = Integer.parseInt(id);
 		//Checking if logged in
 		if(loggedUser == null || !loggedUser.getUsername().equals(username)) {
 			ctx.status(401);
